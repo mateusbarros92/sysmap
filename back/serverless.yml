@@ -1,0 +1,55 @@
+service:
+  name: sysmap
+
+plugins:
+    - serverless-dotenv-plugin
+    - serverless-webpack
+    - serverless-offline
+    - serverless-prune-plugin
+    - serverless-domain-manager
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  timeout: 30
+  region: us-east-1
+  deploymentBucket:
+    name: serverless.deployments.default
+  environment:
+    NODE_ENV: ${self:custom.stageName}
+    TZ: America/Sao_Paulo    
+
+custom:
+    stageName: ${opt:s, 'staging'}
+    dotenv:
+        include:
+        - PRUNE_BACKUP_NUMBER
+        - CUSTOM_DOMAIN_ENABLE
+    webpack:
+        webpackConfig: ./webpack.config.js
+        includeModules: true
+    prune:
+        automatic: true
+        includeLayers: true
+        number: ${env:PRUNE_BACKUP_NUMBER}
+    customDomain:
+        domainName: 'api.mateusbarros.dev'
+        basePath: sysmap
+        certificateName: 'mateusbarros.dev'
+        createRoute53Record: true
+        endpointType: 'regional'
+        enabled: ${env:CUSTOM_DOMAIN_ENABLE}
+        autoDomain: false
+
+functions:
+  graphql:
+    handler: src/server.graphql
+    events:
+      - http:
+          method: post
+          path: /
+          cors: true
+      - http:
+          method: get
+          path: /  
+          cors: true
