@@ -1,0 +1,60 @@
+{
+  "name": "sysmap",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "./",
+  "dependencies": {
+    "@apollo/client": "^3.1.5",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-regular-svg-icons": "^5.15.1",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.12",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "graphql": "^15.3.0",
+    "graphql-tag": "^2.11.0",
+    "lodash.debounce": "^4.0.8",
+    "react": "^16.13.1",
+    "react-apollo": "^3.1.5",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "sweetalert": "^2.1.2",
+    "typescript": "~3.7.2"
+  },
+  "scripts": {
+    "start": "node -r dotenv/config ./node_modules/.bin/react-scripts start dotenv_config_path=./.env.development",
+    "build:staging": "node -r dotenv/config ./node_modules/.bin/react-scripts build dotenv_config_path=./.env.staging",
+    "deploy:staging": "yarn build:staging && aws s3 sync build/ s3://freela-staging/sysmap/staging/ --cache-control 'no-cache, no-store, must-revalidate' --expires 'Wed, 21 Oct 1990 04:20:00 GMT' --acl public-read",
+    "build:production": "node -r dotenv/config ./node_modules/.bin/react-scripts build dotenv_config_path=./.env.production",
+    "deploy:production": "yarn build:production && aws s3 sync build/ s3://freela-staging/sysmap/production/ --cache-control 'no-cache, no-store, must-revalidate' --expires 'Wed, 21 Oct 1990 04:20:00 GMT' --acl public-read",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/lodash.debounce": "^4.0.6",
+    "@types/react-router": "^5.1.8",
+    "@types/react-router-dom": "^5.1.5",
+    "react-app-env": "^1.2.3"
+  }
+}

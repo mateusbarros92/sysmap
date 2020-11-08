@@ -1,0 +1,31 @@
+.main {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid #e6e6e6;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list li {
+  position: relative;
+  font-size: 24px;
+  border-bottom: 1px solid #ededed;
+}
+
+.list li:last-child {
+  border-bottom: none;
+}
+
+.list li label {
+  white-space: pre-line;
+  word-break: break-all;
+  padding: 15px 60px 15px 15px;
+  margin-right: 45px;
+  display: block;
+  line-height: 1.2;
+  transition: color 0.4s;
+}

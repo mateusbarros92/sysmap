@@ -1,0 +1,24 @@
+header {
+  position: relative;
+}
+
+.login-btn {
+  position: absolute;
+  top: -79px;
+  right: 0;
+  border: 2px solid;
+  border-color: #af2f2f26;
+  padding: 2px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 17px;
+  font-family: inherit;
+  font-weight: inherit;
+  color: #af2f2f26;
+  line-height: 1.4em;
+  transition: all 120ms ease-in;
+}
+
+.login-btn:hover {
+  transform: scale(1.05);
+}
