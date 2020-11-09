@@ -58,7 +58,7 @@ function Item({ repository }: IItem) {
   return (
     <li key={repository.id} className="list">
       <div className="view">
-        <label>{repository.name}</label>
+        <label><a rel="noopener noreferrer" href={`https://github.com/${repository.full_name}`} target="_blank">{repository.name}</a></label>
         <FontAwesomeIcon icon={selectedStar} onClick={() => handleStarPress(repository.full_name)} />   
       </div>
     </li>

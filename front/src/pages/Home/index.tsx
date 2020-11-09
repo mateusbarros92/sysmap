@@ -36,9 +36,8 @@ function Home() {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('userName')) {
-      const userName = localStorage.getItem('userName') as string
-      setUserName(userName)
+    const isAuthenticated = () => {
+      return localStorage.getItem('accessToken')
     }
 
     const requestAccessToken = () => {
@@ -47,20 +46,27 @@ function Home() {
           code: code
         }
       })
-      .then(res => {
-        localStorage.setItem('accessToken', res.data.getAccessToken.accessToken)
-        localStorage.setItem('userName', res.data.getAccessToken.userName)
-        setUserName(res.data.getAccessToken.userName)
-      })
-      .catch(error => {
-        swal({
-          title: error.name,
-          text: error.message,
-          icon: 'error'
-        });
-      })
+        .then(res => {
+          localStorage.setItem('accessToken', res.data.getAccessToken.accessToken)
+          localStorage.setItem('userName', res.data.getAccessToken.userName)
+          setUserName(res.data.getAccessToken.userName)
+        })
+        .catch(error => {
+          swal({
+            title: error.name,
+            text: error.message,
+            icon: 'error'
+          });
+        })
     }
-    if (code) requestAccessToken();
+
+    if (isAuthenticated()) {
+      const userName = localStorage.getItem('userName') as string
+      setUserName(userName)
+    }
+    else {
+      if (code) requestAccessToken();
+    }    
   }, [getAccessToken, code])
 
   return (

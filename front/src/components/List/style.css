@@ -29,3 +29,7 @@
   line-height: 1.2;
   transition: color 0.4s;
 }
+
+.list li label a {
+  color: inherit;
+}

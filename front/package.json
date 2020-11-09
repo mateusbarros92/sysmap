@@ -16,6 +16,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "cross-env": "^7.0.2",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
     "lodash.debounce": "^4.0.8",
@@ -28,7 +29,7 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "node -r dotenv/config ./node_modules/.bin/react-scripts start dotenv_config_path=./.env.development",
+    "start": "cross-env PORT=3001 node -r dotenv/config ./node_modules/.bin/react-scripts start dotenv_config_path=./.env.development",
     "build:staging": "node -r dotenv/config ./node_modules/.bin/react-scripts build dotenv_config_path=./.env.staging",
     "deploy:staging": "yarn build:staging && aws s3 sync build/ s3://freela-staging/sysmap/staging/ --cache-control 'no-cache, no-store, must-revalidate' --expires 'Wed, 21 Oct 1990 04:20:00 GMT' --acl public-read",
     "build:production": "node -r dotenv/config ./node_modules/.bin/react-scripts build dotenv_config_path=./.env.production",
