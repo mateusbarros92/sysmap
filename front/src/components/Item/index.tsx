@@ -47,7 +47,7 @@ function Item({ repository }: IItem) {
     if (!localStorage.getItem('accessToken')) {
       swal({
         title: 'Warning!',
-        text: 'It\'s not possible to star a repository without authentication.',
+        text: 'It\'s not possible to star a repository without sign in.',
         icon: 'warning'
       });     
       return false;       

@@ -13,6 +13,7 @@ const GET_ACCESS_TOKEN = gql`
       code: $code
     }) {
       accessToken
+      userName
     }
   }
 `;
@@ -23,6 +24,7 @@ function useQuery() {
 
 function Home() {
   const [owner, setOwnerName] = useState<string>('');
+  const [userName, setUserName] = useState<string>('');
   const query = useQuery();
   const code = query.get('code');
   const debounceQuery = debounce(q => setOwnerName(q), 1000);
@@ -34,6 +36,11 @@ function Home() {
   };
 
   useEffect(() => {
+    if (localStorage.getItem('userName')) {
+      const userName = localStorage.getItem('userName') as string
+      setUserName(userName)
+    }
+
     const requestAccessToken = () => {
       getAccessToken({
         variables: {
@@ -42,6 +49,8 @@ function Home() {
       })
       .then(res => {
         localStorage.setItem('accessToken', res.data.getAccessToken.accessToken)
+        localStorage.setItem('userName', res.data.getAccessToken.userName)
+        setUserName(res.data.getAccessToken.userName)
       })
       .catch(error => {
         swal({
@@ -56,7 +65,7 @@ function Home() {
 
   return (
     <div className="normal">
-      <Header></Header>
+      <Header userName={userName}></Header>
       <input className="search" onChange={e => handleChange(e)} type="text" placeholder="Enter the user name"></input>
       {
         owner ? <List owner={owner}></List> : ''

@@ -14,6 +14,7 @@ input GetAccessTokenInput {
 
 type GetAccessTokenOutput {
   accessToken: String!
+  userName: String!
 }
 
 type GetAuthorizationURLOutput {

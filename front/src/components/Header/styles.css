@@ -2,7 +2,15 @@ header {
   position: relative;
 }
 
-.login-btn {
+.logged-user {
+  position: absolute;
+  top: -33px;
+  right: 0;
+  color: #af2f2f26;
+  font-size: 20px;
+}
+
+.login-out-btn {
   position: absolute;
   top: -79px;
   right: 0;
@@ -19,6 +27,6 @@ header {
   transition: all 120ms ease-in;
 }
 
-.login-btn:hover {
+.login-out-btn:hover {
   transform: scale(1.05);
 }

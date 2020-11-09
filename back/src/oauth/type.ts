@@ -18,4 +18,7 @@ export class GetAuthorizationURLOutput {
 export class GetAccessTokenOutput {
   @Field()
   accessToken: string
+
+  @Field()
+  userName: string
 }

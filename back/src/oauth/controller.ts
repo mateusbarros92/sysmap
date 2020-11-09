@@ -29,8 +29,16 @@ export class OauthController implements OauthDataSource {
       )
     }
 
+    const user = await axios.get('https://api.github.com/user', {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+        Authorization: `token ${oauth.access_token}`
+      }
+    })
+    
     return {
-      accessToken: oauth.access_token
+      accessToken: oauth.access_token,
+      userName: user.data.name
     }
   }
 }
